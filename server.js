@@ -36,13 +36,14 @@ mongoose.connection.once("connected", () =>
   console.log("Connected to Mongo - life is good B^)")
 );
 
+app.use("/todos", require("./controllers/todosController"));
 // app.use("/roles", require("./controllers/rolesController"));
 app.use("/users", require("./controllers/usersController"));
 ////////////////////////////////////////////////////////////
 // *~* --------------------- Routes -------------------- *~*
 ////////////////////////////////////////////////////////////
 app.get("/", (req, res) => {
-  res.send(`<p>Hello, users <strong>B^)</strong></p>`);
+  res.send(`<p>Hello, users <strong>B^)</strong> your todos are here.</p>`);
 });
 ////////////////////////// Login ///////////////////////////
 app.post("/login", (req, res) => {

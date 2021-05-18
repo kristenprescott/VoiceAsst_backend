@@ -1,7 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema({
-  username: { type: String, required: [true, "Please enter a valid username"] },
+  username: {
+    type: String,
+    required: [true, "Please enter a valid username"],
+    unique: true,
+  },
   email: {
     type: String,
     required: [true, "Please enter a valid email address"],
@@ -17,6 +21,7 @@ const userSchema = new Schema({
     // minlength: 6,
     // select: false,
   },
+  todos: [{ type: Schema.Types.ObjectId, ref: "Todo" }],
   // roles: [{ type: Schema.Types.ObjectId, ref: "Role" }],
   //   fruits: [{ type: Schema.Types.ObjectId, ref: "Fruit" }],
   //   veggies: [{ type: Schema.Types.ObjectId, ref: "Veggie" }],
