@@ -1,0 +1,19 @@
+{
+  "name": "virtualassistant",
+  "version": "0.0.1",
+  "description": "Virtual Assistant uses the react-speech-recognition and react-speech-kit hooks to utilize the Web Speech API for Speech Recognition and Voice Synthesis.",
+  "main": "server.js",
+  "author": "Kristen Prescott <prescottdarling@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.9"
+  }
+}
