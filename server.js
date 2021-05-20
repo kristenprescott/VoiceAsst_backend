@@ -36,14 +36,40 @@ mongoose.connection.once("connected", () =>
   console.log("Connected to Mongo - life is good B^)")
 );
 
+app.use("/users", require("./controllers/usersController"));
 app.use("/todos", require("./controllers/todosController"));
 // app.use("/roles", require("./controllers/rolesController"));
-app.use("/users", require("./controllers/usersController"));
 ////////////////////////////////////////////////////////////
 // *~* --------------------- Routes -------------------- *~*
 ////////////////////////////////////////////////////////////
 app.get("/", (req, res) => {
   res.send(`<p>Hello, users <strong>B^)</strong> your todos are here.</p>`);
+});
+///////////////////////// Register //////////////////////////
+app.post("/register", (req, res) => {
+  const passwordHash = hash(req.body.password);
+  req.body.password = bcrypt.hashSync(passwordHash, bcrypt.genSaltSync(10));
+  // console.log(req.body);
+
+  User.create(req.body, (err, createdUser) => {
+    if (err) {
+      console.log(err);
+      res.status(400).json({
+        msg: err.message,
+      });
+    } else {
+      const token = jwt.sign(
+        {
+          id: createdUser._id,
+          username: createdUser.username,
+        },
+        SECRET
+      );
+      res.status(200).json({
+        token,
+      });
+    }
+  });
 });
 ////////////////////////// Login ///////////////////////////
 app.post("/login", (req, res) => {
@@ -74,38 +100,17 @@ app.post("/login", (req, res) => {
     }
   });
 });
-///////////////////////// Register //////////////////////////
-app.post("/register", (req, res) => {
-  const passwordHash = hash(req.body.password);
-  req.body.password = bcrypt.hashSync(passwordHash, bcrypt.genSaltSync(10));
-  // console.log(req.body);
-
-  User.create(req.body, (err, createdUser) => {
-    if (err) {
-      console.log(err);
-      res.status(400).json({
-        msg: err.message,
-      });
-    } else {
-      const token = jwt.sign(
-        {
-          id: createdUser._id,
-          username: createdUser.username,
-        },
-        SECRET
-      );
-      res.status(200).json({
-        token,
-      });
-    }
-  });
-});
 ////////////////////////////////////////////////////////////
 // *~*~*~ Prettier Error Handling For Server Crashes *~*~*~
 ////////////////////////////////////////////////////////////
-const server = app.listen(PORT, () =>
-  console.log(`Server running on port ${PORT}`)
-);
+const server = app.listen(PORT, () => {
+  console.log("┌──────────────────────────────────┐");
+  console.log("│   Listening...                   │");
+  console.log(`│     ... on the port ${PORT}         │`);
+  console.log("│                             ʕ•ᴥ•ʔ│");
+  console.log("└──────────────────────────────────┘");
+  console.log("꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷");
+});
 
 process.on("unhandledRejection", (err, promise) => {
   console.log(`Logged error: ${err}`);

@@ -3,6 +3,7 @@ const SECRET = process.env.SECRET_KEY;
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
+// hash pw
 module.exports.hash = (password) => {
   return crypto
     .createHmac("sha256", SECRET)
@@ -13,6 +14,7 @@ module.exports.hash = (password) => {
     .join("");
 };
 
+// store user locally
 module.exports.jsonAuth = (req, res, next) => {
   const token = req.body.token;
 

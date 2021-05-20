@@ -4,23 +4,22 @@ const router = express.Router();
 const Todo = require("../models/Todo");
 /*
 |----------------------------------------------------------
-| Todos Route
+| Todos Routes
 |----------------------------------------------------------
-| [Method]  [Route]
-| GET       /todos          
-| POST      /todos/new
-| GET       /todos/:id
-| POST      /todos:id   
-| PATCH     /todos:id                           
-| PUT       /todos:id          
-| DELETE    /todos:id          
+| [Method] | [Route]      | [Function]
+| GET      | /todos       | Get all todos
+| POST     | /todos/new   | Add new todo
+| GET      | /todos/:id   | Fetch a specific todo
+| POST     | /todos/:id   | Toggle a todo done
+| PATCH    | /todos/:id   | Modify a todo      
+| PUT      | /todos/:id   | Update a todo
+| DELETE   | /todos/:id   | Delete a todo      
 | 
 */
 
 // METHOD  : GET
 // ROUTE   : /todos
 // FUNCTION: Get all todos
-// INDEX
 router.get("/", async (req, res) => {
   try {
     //Find and sort todos by creation date
@@ -37,7 +36,6 @@ router.get("/", async (req, res) => {
 // METHOD  : POST
 // ROUTE   : /new
 // FUNCTION: Add a new todo
-// CREATE
 router.post("/new", async (req, res) => {
   try {
     const todo = await Todo.create({
@@ -56,8 +54,7 @@ router.post("/new", async (req, res) => {
 
 // METHOD  : GET
 // ROUTE   : /:id
-// FUNCTION: Fetch a todo
-// INDEX Specific todo
+// FUNCTION: Fetch a specific todo
 router.get("/:id", async (req, res) => {
   try {
     const todo = await Todo.findById(req.params.id);
@@ -71,9 +68,8 @@ router.get("/:id", async (req, res) => {
 });
 
 // METHOD  : POST
-// ROUTE   : /todos:id
+// ROUTE   : /:id
 // FUNCTION: Toggle todo to be done or not
-//
 router.post("/:id", async (req, res) => {
   try {
     const todoRef = await Todo.findById(req.params.id);
@@ -92,7 +88,7 @@ router.post("/:id", async (req, res) => {
 });
 
 // METHOD  : PATCH
-// ROUTE   : /todos:id
+// ROUTE   : /:id
 // FUNCTION: Modify the todo
 router.patch("/:id", async (req, res) => {
   try {
@@ -111,7 +107,7 @@ router.patch("/:id", async (req, res) => {
 });
 
 // METHOD  : PUT
-// ROUTE   : /todos:id
+// ROUTE   : /:id
 // FUNCTION: Update the todo
 router.put("/:id", async (req, res) => {
   try {
@@ -131,7 +127,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // METHOD  : DELETE
-// ROUTE   : /todos:id
+// ROUTE   : /:id
 // FUNCTION: Delete the todo
 router.delete("/:id", async (req, res) => {
   try {
@@ -146,3 +142,23 @@ router.delete("/:id", async (req, res) => {
 });
 
 module.exports = router;
+/*////////////////////////////////////////////////////////////////////////////////////*/
+// NOTE: POST/PUT/PATCH:                                                              //
+// ---------------------------------------------------------------------------------- //
+//  * POST : always for creating a resource (does not matter if it was duplicated)    //
+//      - If the client sends data without any identifier, then we will store the     //
+//      data and assign/generate a new identifier.                                    //
+//      - If the client again sends the same data without any identifier, then we     //
+//      will store the data and assign/generate a new identifier.                     //
+//      - *NOTE* Duplication is allowed here.                                         //
+//  * PUT : for checking if a resource exsists, then updating; else, create a new     //
+//      resource (Update & overwrite)                                                 //
+//      - If the client sends data with an identifier, then we will check whether     //
+//      that identifier exists. If the identifier exists, we will update the          //
+//      resource with the data, else we will create a resource with the data          //
+//      and assign/generate a new identifier.                                         //
+//   * PATCH : always for updating a resource                                         //
+//     - If the client sends data with an identifier, then we will check whether      //
+//     that identifier exists. If the identifier exists, we will update the resource  //
+//     with the data, else we will throw an exception.                                //
+/*////////////////////////////////////////////////////////////////////////////////////*/
