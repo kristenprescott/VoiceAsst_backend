@@ -14,7 +14,11 @@ const User = require("./models/User");
 // *~* ------------------- Variables ------------------- *~*
 ////////////////////////////////////////////////////////////
 const app = express();
-const PORT = process.env.PORT || 8080;
+// const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT;
+if (PORT == null || PORT == "") {
+  PORT = 8080;
+}
 const SECRET = process.env.SECRET_KEY;
 ////////////////////////////////////////////////////////////
 // *~* ------------------- Middleware ------------------ *~*
@@ -103,18 +107,19 @@ app.post("/login", (req, res) => {
 ////////////////////////////////////////////////////////////
 // *~*~*~ Prettier Error Handling For Server Crashes *~*~*~
 ////////////////////////////////////////////////////////////
-const server = app.listen(PORT, () => {
-  console.log("┌──────────────────────────────────┐");
-  console.log("│   Listening...                   │");
-  console.log(`│     ... on the port ${PORT}         │`);
-  console.log("│                             ʕ•ᴥ•ʔ│");
-  console.log("└──────────────────────────────────┘");
-  console.log("꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷");
-});
+// const server = app.listen(PORT, () => {
+//   console.log("┌──────────────────────────────────┐");
+//   console.log("│   Listening...                   │");
+//   console.log(`│     ... on the port ${PORT}         │`);
+//   console.log("│                             ʕ•ᴥ•ʔ│");
+//   console.log("└──────────────────────────────────┘");
+//   console.log("꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷");
+// });
 
-process.on("unhandledRejection", (err, promise) => {
-  console.log(`Logged error: ${err}`);
-  server.close(() => {
-    process.exit(1);
-  });
-});
+// process.on("unhandledRejection", (err, promise) => {
+//   console.log(`Logged error: ${err}`);
+//   server.close(() => {
+//     process.exit(1);
+//   });
+// });
+app.listen(PORT);
