@@ -141,6 +141,21 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// get by created at index
+router.get("/", async (req, res) => {
+  try {
+    //Find and sort todos by creation date
+    const todos = await Todo.find().sort([["createdAt", -1]]);
+    const lastTodo = todos[0];
+
+    res.send(lastTodo);
+  } catch (error) {
+    res.status(400).json({
+      msg: error.message,
+    });
+  }
+});
+
 module.exports = router;
 /*////////////////////////////////////////////////////////////////////////////////////*/
 // NOTE: POST/PUT/PATCH:                                                              //
