@@ -27,10 +27,10 @@ app.use((req, res, next) => {
 app.use(cors());
 
 mongoose.connect(process.env.MONGO_URI, {
-  useUnifiedTopology: false,
+  useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,
-  useFindAndModify: true,
+  useFindAndModify: false,
 });
 mongoose.connection.once("connected", () =>
   console.log("Connected to Mongo - life is good B^)")
