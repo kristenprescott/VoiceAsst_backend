@@ -46,13 +46,13 @@ app.get("/", (req, res) => {
   // res.send(`<p>Hello, users <strong>B^)</strong> your todos are here.</p>`);
   res.send(`
   <center>
-    <div>┌──────────────────────────────────┐</div>
+    <div>╭──────────────────────────────────╮</div>
     <div>│꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦│</div>
     <div>│꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦ PORT ꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦ │</div>
     <div>│ ꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷${PORT}꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦│</div>
     <div>│꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦ʕ•ᴥ•ʔ꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦│</div>
     <div>│꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦│</div>
-    <div>└──────────────────────────────────┘</div>
+    <div>╰──────────────────────────────────╯</div>
   </center>
   `);
 });
@@ -121,14 +121,15 @@ app.post("/login", (req, res) => {
 ////////////////////////////////////////////////////////////
 // *~*~*~ Prettier Error Handling For Server Crashes *~*~*~
 ////////////////////////////////////////////////////////////
-// const server = app.listen(PORT, () => {
-//   console.log("┌──────────────────────────────────┐");
-//   console.log("│   Listening...                   │");
-//   console.log(`│     ... on the port ${PORT}         │`);
-//   console.log("│                             ʕ•ᴥ•ʔ│");
-//   console.log("└──────────────────────────────────┘");
-//   console.log("꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷);
-// });
+const server = app.listen(PORT, () => {
+  console.log("╭──────────────────────────────────╮");
+  console.log("│꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷│");
+  console.log(`│꒦꒷꒦꒷꒦꒷꒦ PORT ꒦꒷꒦꒷꒦꒷꒦│`);
+  console.log(`│꒷꒦꒷꒦꒷꒦꒷꒦${PORT}꒦꒷꒦꒷꒦꒷꒦│`);
+  console.log("│꒷꒦꒷꒦꒷꒦꒷꒦꒷ʕ•ᴥ•ʔ.꒦꒷꒦꒷꒦│");
+  console.log("│꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷│");
+  console.log("╰──────────────────────────────────╯");
+});
 
 // process.on("unhandledRejection", (err, promise) => {
 //   console.log(`Logged error: ${err}`);
@@ -136,6 +137,6 @@ app.post("/login", (req, res) => {
 //     process.exit(1);
 //   });
 // });
-app.listen(PORT, () => {
-  console.warn(`App listening on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.warn(`App listening on http://localhost:${PORT}`);
+// });

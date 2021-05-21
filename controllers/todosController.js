@@ -141,7 +141,9 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// get by created at index
+// METHOD   : GET
+// ROUTE    : /
+// FUNCTION : get by created at index
 router.get("/", async (req, res) => {
   try {
     //Find and sort todos by creation date
