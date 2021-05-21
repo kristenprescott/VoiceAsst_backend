@@ -30,7 +30,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,
-  useFindAndModify: false,
+  // useFindAndModify: false,
 });
 mongoose.connection.once("connected", () =>
   console.log("Connected to Mongo - life is good B^)")
