@@ -14,11 +14,7 @@ const User = require("./models/User");
 // *~* ------------------- Variables ------------------- *~*
 ////////////////////////////////////////////////////////////
 const app = express();
-// const PORT = process.env.PORT || 8080;
-const PORT = process.env.PORT;
-if (PORT == null || PORT == "") {
-  PORT = 8080;
-}
+const PORT = process.env.PORT || 8080;
 const SECRET = process.env.SECRET_KEY;
 ////////////////////////////////////////////////////////////
 // *~* ------------------- Middleware ------------------ *~*
@@ -129,4 +125,6 @@ app.post("/login", (req, res) => {
 //     process.exit(1);
 //   });
 // });
-app.listen(PORT);
+app.listen(PORT, () => {
+  console.warn(`App listening on http://localhost:${PORT}`);
+});
