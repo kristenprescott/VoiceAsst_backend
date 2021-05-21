@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 app.use(cors());
 
 mongoose.connect(process.env.MONGO_URI, {
-  useUnifiedTopology: true,
+  useUnifiedTopology: false,
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: true,
