@@ -30,7 +30,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,
-  // useFindAndModify: false,
+  useFindAndModify: false,
 });
 mongoose.connection.once("connected", () =>
   console.log("Connected to Mongo - life is good B^)")
@@ -45,13 +45,13 @@ app.use("/todos", require("./controllers/todosController"));
 app.get("/", (req, res) => {
   res.send(`<p>Hello, users <strong>B^)</strong> your todos are here.</p>`);
 });
-app.get("/*", (req, res) => {
-  let url = path.join(__dirname, "../client/build", "index.html");
-  if (!url.startsWith("/app/"))
-    // we're on local windows
-    url = url.substring(1);
-  res.sendFile(url);
-});
+// app.get("/*", (req, res) => {
+//   let url = path.join(__dirname, "../client/build", "index.html");
+//   if (!url.startsWith("/app/"))
+//     // we're on local windows
+//     url = url.substring(1);
+//   res.sendFile(url);
+// });
 ///////////////////////// Register //////////////////////////
 app.post("/register", (req, res) => {
   const passwordHash = hash(req.body.password);
