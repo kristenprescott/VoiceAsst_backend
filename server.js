@@ -128,7 +128,7 @@ app.post("/login", (req, res) => {
  * For more information, read
  * https://developer.spotify.com/web-api/authorization-guide/#client_credentials_flow
  */
-
+/*
 var request = require("request"); // "Request" library
 
 var client_id = "CLIENT_ID"; // Your client id
@@ -175,7 +175,7 @@ app.get("/login", function (req, res) {
       encodeURIComponent(redirect_uri)
   );
 });
-
+*/
 ////////////////////////////////////////////////////////////
 // *~*~*~ Prettier Error Handling For Server Crashes *~*~*~
 ////////////////////////////////////////////////////////////
